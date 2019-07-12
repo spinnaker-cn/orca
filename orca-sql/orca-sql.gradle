@@ -1,0 +1,51 @@
+/*
+ * Copyright 2017 Netflix, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License")
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+apply from: "$rootDir/gradle/kotlin.gradle"
+apply from: "$rootDir/gradle/spock.gradle"
+
+dependencies {
+  compile project(":orca-core")
+
+  // TODO rz - Prefer definitely not having this
+  compile project(":orca-queue-redis")
+
+  compile "org.springframework:spring-jdbc:${spinnaker.version("spring")}"
+  compile "org.springframework:spring-tx:${spinnaker.version("spring")}"
+  compile "org.jooq:jooq:3.9.6"
+  compile "org.liquibase:liquibase-core:3.6.1"
+  compile 'com.zaxxer:HikariCP:2.5.1'
+
+  testCompile "com.h2database:h2:1.4.197"
+  testCompile project(":orca-core-tck")
+  testCompile project(":orca-test-groovy")
+
+  testCompile "io.strikt:strikt-core:0.11.5"
+  testCompile "org.assertj:assertj-core:3.9.0"
+  testCompile "org.junit.jupiter:junit-jupiter-api:$jupiterVersion"
+  testCompile "dev.minutest:minutest:0.45.0"
+  testCompile "com.nhaarman:mockito-kotlin:1.5.0"
+
+  testRuntime "org.junit.jupiter:junit-jupiter-engine:$jupiterVersion"
+  testRuntime "org.junit.platform:junit-platform-launcher:$junitVersion"
+  testRuntime "org.junit.vintage:junit-vintage-engine:$junitLegacyVersion"
+}
+
+test {
+  useJUnitPlatform {
+    includeEngines "junit-vintage", "junit-jupiter"
+  }
+}
