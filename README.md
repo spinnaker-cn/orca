@@ -23,3 +23,16 @@ To start the JVM in debug mode, set the Java system property `DEBUG=true`:
 The JVM will then listen for a debugger to be attached on port 8183.  The JVM will _not_ wait for
 the debugger to be attached before starting Orca; the relevant JVM arguments can be seen and
 modified as needed in `build.gradle`.
+
+### Added by 叶静涛
+
+源码启动：
+```
+nohup sh -c "./gradlew --daemon 2>&1 | tee /tmp//orca.log | cat >/dev/null" >/dev/null &
+```
+
+Jvm远程调试（调试端口）：
+```
+nohup sh -c "./gradlew -DDEBUG=true --daemon 2>&1 | tee /tmp//orca.log | cat >/dev/null" >/dev/null &
+```
+
