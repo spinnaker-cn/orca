@@ -31,7 +31,7 @@ modified as needed in `build.gradle`.
 nohup sh -c "./gradlew --daemon 2>&1 | tee /tmp//orca.log | cat >/dev/null" >/dev/null &
 ```
 
-Jvm远程调试（调试端口）：
+Jvm远程调试（调试端口8183）：
 ```
 nohup sh -c "./gradlew -DDEBUG=true --daemon 2>&1 | tee /tmp//orca.log | cat >/dev/null" >/dev/null &
 ```
