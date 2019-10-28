@@ -53,6 +53,7 @@ public class ModifyScalingGroupTask implements Task {
             .put("deploy.server.groups", deployServerGroups)
             .put("kato.last.task.id", taskId)
             .build();
-    return TaskResult.builder(ExecutionStatus.SUCCEEDED).context(result).build();
+    return new TaskResult(ExecutionStatus.SUCCEEDED,result);
+    //return TaskResult.builder(ExecutionStatus.SUCCEEDED).context(result).build();
   }
 }
