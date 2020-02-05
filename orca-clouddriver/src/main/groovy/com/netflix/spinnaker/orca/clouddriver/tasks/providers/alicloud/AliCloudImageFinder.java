@@ -42,13 +42,13 @@ public class AliCloudImageFinder implements ImageFinder {
 
   @Override
   public Collection<ImageDetails> byTags(
-      Stage stage, String packageName, Map<String, String> tags) {
+    Stage stage, String packageName, Map<String, String> tags) {
     List<AliCloudImage> allMatchedImages =
-        oortService.findImage(getCloudProvider(), packageName, null, null, prefixTags(tags))
-            .stream()
-            .map(image -> objectMapper.convertValue(image, AliCloudImage.class))
-            .sorted()
-            .collect(Collectors.toList());
+      oortService.findImage(getCloudProvider(), packageName, null, null, prefixTags(tags))
+        .stream()
+        .map(image -> objectMapper.convertValue(image, AliCloudImage.class))
+        .sorted()
+        .collect(Collectors.toList());
 
     /*
      * Find the most recently created image.
@@ -69,7 +69,7 @@ public class AliCloudImageFinder implements ImageFinder {
 
   static Map<String, String> prefixTags(Map<String, String> tags) {
     return tags.entrySet().stream()
-        .collect(toMap(entry -> "tag:" + entry.getKey(), Map.Entry::getValue));
+      .collect(toMap(entry -> "tag:" + entry.getKey(), Map.Entry::getValue));
   }
 
   static class AliCloudImage implements Comparable<AliCloudImage> {
@@ -80,7 +80,8 @@ public class AliCloudImageFinder implements ImageFinder {
 
     ImageDetails toAliCloudImageDetails() {
       JenkinsDetails jenkinsDetails = new JenkinsDetails("", "", "");
-      return new AliCloudImageDetails(imageName, jenkinsDetails);
+      String imageId = attributes.get("imageId").toString();
+      return new AliCloudImageDetails(imageName, imageId, jenkinsDetails);
     }
 
     @Override
@@ -95,18 +96,18 @@ public class AliCloudImageFinder implements ImageFinder {
 
       // a lexicographic sort is sufficient given that `creationDate` is ISO 8601
       return o.attributes
-          .get("creationTime")
-          .toString()
-          .compareTo(attributes.get("creationTime").toString());
+        .get("creationTime")
+        .toString()
+        .compareTo(attributes.get("creationTime").toString());
     }
   }
 
   private static class AliCloudImageDetails extends HashMap<String, Object>
-      implements ImageDetails {
-    AliCloudImageDetails(String imageName, JenkinsDetails jenkinsDetails) {
+    implements ImageDetails {
+    AliCloudImageDetails(String imageName,  String imageId, JenkinsDetails jenkinsDetails) {
       put("imageName", imageName);
 
-      put("imageId", imageName);
+      put("imageId", imageId);
 
       put("ami", imageName);
 
