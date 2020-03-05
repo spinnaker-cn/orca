@@ -23,7 +23,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public interface ImageFinder {
+
   Collection<ImageDetails> byTags(Stage stage, String packageName, Map<String, String> tags);
+
+  default Collection<ImageDetails> byName(Stage stage, String packageName, String imageName) {
+    return null;
+  }
+
   String getCloudProvider();
 
   interface ImageDetails {

@@ -39,5 +39,5 @@ public class DefaultExceptionHandler implements ExceptionHandler {
     exceptionDetails.put("stackTrace", Throwables.getStackTraceAsString(e));
     log.warn(format("Error occurred during task %s", taskName), e);
     return new ExceptionHandler.Response(e.getClass().getSimpleName(), taskName, exceptionDetails, false);
-  }
+}
 }
