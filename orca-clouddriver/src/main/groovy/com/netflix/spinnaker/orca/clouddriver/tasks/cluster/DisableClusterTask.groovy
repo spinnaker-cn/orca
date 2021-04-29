@@ -20,10 +20,14 @@ import com.netflix.spinnaker.orca.clouddriver.pipeline.servergroup.support.Locat
 import com.netflix.spinnaker.orca.clouddriver.pipeline.servergroup.support.TargetServerGroup
 import com.netflix.spinnaker.orca.pipeline.model.Stage
 import groovy.transform.Canonical
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
 @Component
 class DisableClusterTask extends AbstractClusterWideClouddriverTask {
+
+  @Value('${tasks.disableClusterTaskTimeoutMillis:300000}')
+  long timeout
 
   @Override
   String getClouddriverOperation() {
