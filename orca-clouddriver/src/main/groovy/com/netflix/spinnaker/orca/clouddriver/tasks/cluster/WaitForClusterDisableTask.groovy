@@ -35,6 +35,9 @@ class WaitForClusterDisableTask extends AbstractWaitForClusterWideClouddriverTas
   @Value('${tasks.disableClusterMinTimeMillis:90000}')
   private int MINIMUM_WAIT_TIME_MS
 
+  @Value('${tasks.waitForClusterDisableTaskTimeoutMillis:3600000}')
+  long timeout
+
   private final Map<String, String> healthProviderNamesByPlatform
 
   @Autowired
