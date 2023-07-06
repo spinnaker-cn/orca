@@ -34,7 +34,8 @@ trait ApplicationNameValidator {
     // Tencent auto-scaling group name support 55 characters at most
     // But spinnaker will add about 5 characters of version info behind app name to construct AS name
     // So we leave 50 characters here
-    'tencent'   : new NameConstraint(50, '^[a-zA-Z_0-9.\u4e00-\u9fa5-]*$')
+    'tencent'   : new NameConstraint(50, '^[a-zA-Z_0-9.\u4e00-\u9fa5-]*$'),
+    'ctyun'   : new NameConstraint(50, '^[a-zA-Z_0-9.\u4e00-\u9fa5-]*$')
   ]
 
   /**
