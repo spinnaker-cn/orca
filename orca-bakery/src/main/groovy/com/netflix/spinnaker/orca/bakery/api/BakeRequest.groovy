@@ -37,12 +37,13 @@ class BakeRequest {
     new PropertyNamingStrategy.LowerCaseWithUnderscoresStrategy()
 
   static final Default = new BakeRequest(user: System.getProperty("user.name"),
-                                         cloudProviderType: CloudProviderType.aws,
-                                         baseLabel: "release",
-                                         baseOs: "ubuntu")
+    cloudProviderType: CloudProviderType.aws,
+    baseLabel: "release",
+    baseOs: "ubuntu")
 
   String user
-  @JsonProperty("package") String packageName
+  @JsonProperty("package")
+  String packageName
   List<Artifact> packageArtifacts
   String buildHost
   String job
@@ -76,7 +77,7 @@ class BakeRequest {
   }
 
   static enum CloudProviderType {
-    aws, azure, docker, gce, openstack, titus, oracle, tencent, alicloud, huaweicloud, hecloud,ctyun
+    aws, azure, docker, gce, openstack, titus, oracle, tencent, alicloud, huaweicloud, hecloud, ctyun, ecloud
   }
 
   static enum VmType {
